@@ -9,3 +9,7 @@ docker build --platform linux/amd64 -t imok2/hadoop-resourcemanager:hadoop3.2.2-
 docker build --platform linux/amd64 -t imok2/hadoop-nodemanager:hadoop3.2.2-java8 ./nodemanager
 docker build --platform linux/amd64 -t imok2/hadoop-historyserver:hadoop3.2.2-java8 ./historyserver
 ```
+
+## reference
+
+https://github.com/big-data-europe/docker-hadoop
