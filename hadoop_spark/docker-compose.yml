@@ -8,7 +8,7 @@ services:
     container_name: jupyterlab
     restart: always
     ports:
-      - 8888:8888
+      - 8886:8886
     volumes:
      - shared-workspace:/opt/workspace
     networks:
