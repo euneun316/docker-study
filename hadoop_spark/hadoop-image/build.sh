@@ -45,5 +45,5 @@ docker build --platform linux/amd64 --no-cache -t imok2/hadoop-namenode-sqoop:ha
 # # hadoop-nodemanager
 docker build --platform linux/amd64 --no-cache -t imok2/hadoop-nodemanager:hadoop3.2.2-java8 ./nodemanager
 
-# # adoop-resourcemanager
+# # hadoop-resourcemanager
 docker build --platform linux/amd64 --no-cache -t imok2/hadoop-resourcemanager:hadoop3.2.2-java8 ./resourcemanager

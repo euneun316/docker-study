@@ -11,7 +11,7 @@ docker build --no-cache --platform linux/amd64 -f spark-master.Dockerfile -t imo
 # spark-worker
 docker build --no-cache --platform linux/amd64 -f spark-worker.Dockerfile -t imok2/spark-worker .
 # jupyterlab
-docker build --platform linux/amd64 -f jupyterlab.Dockerfile -t imok2/jupyterlab .
+docker build --no-cache --platform linux/amd64 -f jupyterlab.Dockerfile -t imok2/jupyterlab .
 ```
 
 ## build.sh
