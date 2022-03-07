@@ -19,3 +19,6 @@ docker build --no-cache -f jupyterlab.Dockerfile --build-arg spark_version="3.1.
 sh ./docker-study/hadoop_spark/spark-image/build.sh
 ```
 
+## reference
+
+https://github.com/RWaltersMA/mongo-spark-jupyter
