@@ -1,4 +1,4 @@
-FROM cluster-base
+FROM imok2/cluster-base:spark3.1.2 
 
 # -- Layer: JupyterLab
 

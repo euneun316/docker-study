@@ -1,4 +1,4 @@
-FROM spark-base
+FROM imok2/spark-base:spark3.1.2 
 
 # -- Runtime
 

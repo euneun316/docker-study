@@ -5,35 +5,30 @@ HADOOP_VERSION="3.2"
 JUPYTERLAB_VERSION="2.2.6"
 
 # cluster-base
-docker build --no-cache \
-  --platform linux/amd64 \
+docker build --no-cache --platform linux/amd64 \
   -f cluster-base.Dockerfile \
-  -t imok2/cluster-base .
+  -t imok2/cluster-base:spark3.1.2 .
 
 # spark-base
-docker build --no-cache \
-  --platform linux/amd64 \
+docker build --no-cache --platform linux/amd64 \
   --build-arg spark_version="${SPARK_VERSION}" \
   --build-arg hadoop_version="${HADOOP_VERSION}" \
   -f spark-base.Dockerfile \
-  -t imok2/spark-base .
+  -t imok2/spark-base:spark3.1.2 .
 
 # spark-master
-docker build --no-cache \
-  --platform linux/amd64 \
+docker build --no-cache --platform linux/amd64 \
   -f spark-master.Dockerfile \
-  -t imok2/spark-master .
+  -t imok2/spark-master:spark3.1.2 .
 
 # spark-worker
-docker build --no-cache \
-  --platform linux/amd64 \
+docker build --no-cache --platform linux/amd64 \
   -f spark-worker.Dockerfile \
-  -t imok2/spark-worker .
+  -t imok2/spark-worker:spark3.1.2 .
 
 # jupyterlab
-docker build \
-  --platform linux/amd64 \
+docker build --no-cache --platform linux/amd64 \
   --build-arg spark_version="${SPARK_VERSION}" \
   --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
   -f jupyterlab.Dockerfile \
-  -t imok2/jupyterlab .
+  -t imok2/jupyterlab:spark3.1.2 .
