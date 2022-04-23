@@ -79,6 +79,20 @@ python3 setup.py install
 
 WORKDIR /notebooks
 
+# pyrouge
+RUN git clone https://github.com/bheinzerling/pyrouge && \
+cd pyrouge && \
+python3 setup.py install && \
+cd pyrouge && \
+git clone https://github.com/andersjo/pyrouge.git rouge
+
+RUN pyrouge_set_rouge_path '/notebooks/pyrouge/pyrouge/rouge/tools/ROUGE-1.5.5' && \
+cd /notebooks/pyrouge/pyrouge/rouge/tools/ROUGE-1.5.5/data && \
+mv WordNet-2.0.exc.db WordNet-2.0.exc.db.orig && \
+perl WordNet-2.0-Exceptions/buildExeptionDB.pl ./WordNet-2.0-Exceptions ./smart_common_words.txt ./WordNet-2.0.exc.db
+
+WORKDIR /notebooks
+
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/
 
@@ -86,8 +100,5 @@ COPY run_jupyter.sh /
 
 # IPython
 EXPOSE 8888
-
-# Tensorboard
-EXPOSE 6006
 
 CMD ["/run_jupyter.sh", "--allow-root"]

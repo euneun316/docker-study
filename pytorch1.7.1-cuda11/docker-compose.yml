@@ -1,0 +1,41 @@
+version: '1'
+
+services:
+    pytorch:
+        image: cuda11.3:pytorch1.7.1
+        container_name: pytorch
+        restart: always
+        ports:
+            - '8888:8888'
+        volumes:
+            - $PWD/notebooks:/notebooks
+        depends_on:
+            - mysql
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - capabilities: [gpu]
+
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 1234
+            MYSQL_USER_NAME: root
+            MYSQL_PASSWORD: 1234
+            MYSQL_DATABASE: news-kids
+        command:
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
+        ports:
+            - '3306:3306'
+        volumes:
+            - mysql_data:/var/lib/mysql
+volumes:
+    mysql_data:
+networks:
+    hadoopnet:
+        external:
+            name: pytorch

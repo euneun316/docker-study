@@ -20,3 +20,5 @@ wordcloud
 konlpy
 JPype1
 jamo
+pymysql
+sqlalchemy
