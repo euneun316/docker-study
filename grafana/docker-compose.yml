@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "33062:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: grafana
+      MYSQL_USER: grafana
+      MYSQL_PASSWORD: grafana
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    networks:
+      grafana:
+
+  grafana_db:
+    image: mysql
+    container_name: grafana_db
+    ports:
+      - "33061:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: grafana
+      MYSQL_USER: grafana
+      MYSQL_PASSWORD: grafana
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    networks:
+      grafana:
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      # - GF_PATHS_CONFIG=/grafana/grafana.ini
+      - GF_SECURITY_ADMIN_USER=imok
+      - GF_SECURITY_ADMIN_PASSWORD=imok
+      - GF_SERVER_DOMAIN=localhost
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_DATABASE_HOST=grafana_db:3306
+      - GF_DATABASE_NAME=grafana
+      - GF_DATABASE_USER=grafana
+      - GF_DATABASE_PASSWORD=grafana
+      - GF_DATABASE_TYPE=mysql
+      - GF_PATHS_LOGS=/var/log/grafana/
+      - GF_LOG_MODE=file console
+    depends_on: ["grafana_db"]
+    restart: always
+    volumes:
+      - ./grafana:/var/lib/grafana
+      - ./grafana/log:/var/log/grafana
+    networks:
+      grafana:
+networks:
+  grafana:
